@@ -83,7 +83,7 @@ userSchema.statics.findingUser=async(email,password)=>{
 
 userSchema.methods.generation = async function(){
     const user = this
-    const token = await jwt.sign({_id: user._id.toString()}, 'Geosynthetics')
+    const token = await jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET)
 
     user.tokens = await user.tokens.concat({token})
     await user.save()
